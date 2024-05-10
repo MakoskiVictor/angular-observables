@@ -1,0 +1,30 @@
+<h2>Favourites Characters</h2>
+<ng-container *ngIf="favourites$ | async as favourites; else spinner">
+
+  <div class="cards-container" >
+  
+      <div  *ngFor=" let favourite of favourites ">
+        <mat-card >
+          <mat-card-content>
+  
+              <mat-card-title>
+                {{ favourite.name }}
+              </mat-card-title>
+  
+            
+              <img mat-card-image src="{{ favourite.image }}" alt="{{ favourite.name }}">
+            </mat-card-content>
+            <button (click)="quitFavourite(favourite)" >
+              <img src="/assets/icons/heart-minus.svg" alt="heart-icon" />
+            </button>
+        </mat-card>
+      </div>
+      
+  </div>
+
+</ng-container>
+
+<ng-template #spinner>
+  <mat-spinner></mat-spinner>
+</ng-template>
+

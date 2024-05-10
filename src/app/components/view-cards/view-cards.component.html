@@ -1,0 +1,42 @@
+<h2>Rick and Morty Characters</h2>
+<ng-container *ngIf="characters$ | async as characters; else spinner">
+
+  <div class="cards-container" >
+  
+      <div  *ngFor=" let character of characters ">
+        <mat-card >
+          <mat-card-content>
+  
+              <mat-card-title>
+                {{ character.name }}
+              </mat-card-title>
+  
+              <img mat-card-image src="{{ character.image }}" alt="{{ character.name }}-image">
+
+            </mat-card-content>
+            <ng-container *ngIf="!isFavourite(character); else quitfav" >
+              <button (click)="setFavourite(character)">
+                <img src="/assets/icons/heart-plus.svg"  alt="heart-icon" />
+              </button>
+            </ng-container>
+
+            <ng-template #quitfav>
+              <button (click)="quitFavourite(character)" >
+                <img src="/assets/icons/heart-minus.svg"  alt="heart-icon" />
+              </button>
+            </ng-template>
+
+        </mat-card>
+      </div>
+      
+  </div>
+
+
+</ng-container>
+
+<ng-template #spinner>
+  <mat-spinner></mat-spinner>
+</ng-template>
+
+
+
